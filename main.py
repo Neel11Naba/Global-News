@@ -42,6 +42,11 @@ def get_news(query=None, category=None, country='us'):
 def home():
     query = request.args.get("q")
     selected_category = request.args.get("category", "business")
+    
+    #Show indian stock market news by default
+    if not query :
+        query= "indian stock market "
+        
     articles = get_news(query=query or "indian stock market", category=selected_category)
     categories = ["business", "technology", "entertainment", "health", "science", "sports"]
     return render_template("index.html", articles=articles, categories=categories, selected_category=selected_category)
